@@ -26,6 +26,9 @@
           };
           nativeBuildInputs = [pkgs.autoPatchelfHook];
           buildInputs = [pkgs.stdenv.cc.cc.lib];
+          # installPhase = ''
+          #   tar -xJf ../syside-0.8.3-x86_64-linux-glibc.tar.xz -C $out/share/vscode/extensions/sensmetry.syside-editor/dist
+          # '';
         };
 
         vscode = pkgs.vscode-with-extensions.override {
