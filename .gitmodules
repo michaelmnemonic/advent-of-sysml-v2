@@ -1,0 +1,3 @@
+[submodule "advent-of-sysml-v2"]
+	path = advent-of-sysml-v2
+	url = https://github.com/sensmetry/advent-of-sysml-v2.git
