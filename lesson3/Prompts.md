@@ -1,0 +1,1 @@
+(1) Take a look at @lesson3/L03_SantaWorkshop.sysml and help me refactor the elf classes. take a look at albert and apply the same pattern to the rest
