@@ -9,7 +9,7 @@ package L04_SantaCargoBay_Challenge {
 
     part def BottomlessGiftBag specializes Bag {
         /* Define the bottomless gift bag that can hold any number of gifts (gifts are items). 
-         * We are using a specializes relationship as a bottomless bag is a aüsecial kind of bag
+         * We are using a specializes relationship as a bottomless bag is a special kind of bag
          */
         item gifts [*]; // Note the "*" to indicate an unlimited amount of gifts
     }
