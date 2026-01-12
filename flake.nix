@@ -14,6 +14,7 @@
   in {
     packages = forAllSystems (system: let
       pkgs = nixpkgs.legacyPackages.${system}.pkgs;
+      syside_version = "0.8.3";
     in {
       vscode = pkgs.vscode-with-extensions.override {
         vscodeExtensions = with pkgs.vscode-extensions;
@@ -46,17 +47,17 @@
         mktplcRef = {
           name = "syside-editor";
           publisher = "sensmetry";
-          version = "0.8.3";
+          version = syside_version;
           sha256 = "sha256-mZGtB1BaeVIR4K/cT0elpfW7zrQBFScVHHOsHIuKvJg=";
           arch = "linux-x64";
         };
       };
       syside-modeler-cli = pkgs.stdenv.mkDerivation {
         pname = "syside-modeler-cli";
-        version = "0.8.3";
+        version = syside_version;
 
         src = pkgs.fetchurl {
-          url = "https://gitlab.com/api/v4/projects/69960816/packages/generic/syside/0.8.3/syside-0.8.3-x86_64-linux-glibc.tar.xz";
+          url = "https://gitlab.com/api/v4/projects/69960816/packages/generic/syside/${syside_version}/syside-${syside_version}-x86_64-linux-glibc.tar.xz";
           sha256 = "sha256-C02KlqWg803/xR2651aTsAcnmfFQOCU3+Tc+VKgznXA=";
         };
 
