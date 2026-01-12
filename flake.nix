@@ -64,7 +64,7 @@
         sourceRoot = ".";
 
         nativeBuildInputs = [pkgs.autoPatchelfHook];
-        buildInputs = [pkgs.stdenv.cc.cc.lib];
+        buildInputs = [];
 
         installPhase = ''
           mkdir -p $out
