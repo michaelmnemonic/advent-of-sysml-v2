@@ -16,10 +16,31 @@
       pkgs = nixpkgs.legacyPackages.${system}.pkgs;
     in {
       vscode = pkgs.vscode-with-extensions.override {
-        vscodeExtensions = with pkgs.vscode-extensions; [
-          mkhl.direnv
-          self.packages.${system}.syside
-        ];
+        vscodeExtensions = with pkgs.vscode-extensions;
+          [
+            mkhl.direnv
+            self.packages.${system}.syside
+          ]
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "geminicodeassist";
+              publisher = "google";
+              version = "2.64.0";
+              sha256 = "sha256-7YDglB8DJFu77BDCoxkij+xXsIuLTPeaUqXoDtAWjVQ=";
+            }
+            {
+              name = "code-spell-checker";
+              publisher = "streetsidesoftware";
+              version = "4.4.0";
+              sha256 = "sha256-4tamHxduWgtGirvS+I6YlYlE3JGzlwDMD21dKaTP9io=";
+            }
+            {
+              name = "code-spell-checker-german";
+              publisher = "streetsidesoftware";
+              version = "2.3.4";
+              sha256 = "sha256-zc0cv4AOswvYcC4xJOq2JEPMQ5qTj9Dad5HhxtNETEs=";
+            }
+          ];
       };
       syside = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
