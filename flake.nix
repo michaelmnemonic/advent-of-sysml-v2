@@ -12,10 +12,14 @@
     systems = ["x86_64-linux" "aarch64-linux"];
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    devShell = forAllSystems (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-
+    packages = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system}.pkgs;
+    in {
+      vscode = pkgs.vscode-with-extensions.override {
+          vscodeExtensions = [
+            self.packages.${system}.syside
+          ];
+        };
         syside = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "syside-editor";
@@ -30,18 +34,17 @@
           #   tar -xJf ../syside-0.8.3-x86_64-linux-glibc.tar.xz -C $out/share/vscode/extensions/sensmetry.syside-editor/dist
           # '';
         };
+    });
+    devShell = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
 
-        vscode = pkgs.vscode-with-extensions.override {
-          vscodeExtensions = [
-            syside
-          ];
-        };
       in
         pkgs.mkShell {
           buildInputs = with pkgs;
             [
               alejandra
-            ]
+            ];
           shellHook = ''
             alias code='NIXPKGS_ALLOW_UNFREE=1 nix run --impure .#vscode -- '
           '';
