@@ -8,7 +8,7 @@ package L08_SantaSleigh_Challenge {
                 item payload : Payload [1];
             }
 
-            part def OrdinayCargoBay specializes CargoBay {
+            part def OrdinaryCargoBay specializes CargoBay {
                 item redefines payload [1] : BottomlessGiftBag; 
             }
 
@@ -16,7 +16,7 @@ package L08_SantaSleigh_Challenge {
                 item redefines payload [*] : OrdinaryBag; 
             }
 
-            // Paylad
+            // Payload
             abstract part def Payload;
             part def BottomlessGiftBag specializes Payload;
             part def OrdinaryBag specializes Payload;
@@ -60,7 +60,7 @@ package L08_SantaSleigh_Challenge {
                 // TASK 2:
                 // Add composite or referential usages to model:
                 
-                // - exctly two runners, 
+                // - exactly two runners, 
                 part leftRunner [1] subsets runners; // enumerated as the left runner
                 part rightRunner [1] subsets runners; //  and the right runner
 
@@ -73,7 +73,7 @@ package L08_SantaSleigh_Challenge {
                 ref item santa;
                 
 
-                ref part dasher  subsets reindeer[1]; // we want to make sure to make it explit that we a
+                ref part dasher  subsets reindeer[1]; // we want to make sure to make it explicit that we a
                 ref part dancer  subsets reindeer[1]; // referring to a single reindeer
                 ref part prancer subsets reindeer[1];
                 ref part vixen   subsets reindeer[1];
