@@ -20,7 +20,7 @@
         vscodeExtensions = with pkgs.vscode-extensions;
           [
             mkhl.direnv
-            self.packages.${system}.syside
+            self.packages.${system}.syside-vscode-extension
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
@@ -43,7 +43,7 @@
             }
           ];
       };
-      syside = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+      syside-vscode-extension = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "syside-editor";
           publisher = "sensmetry";
