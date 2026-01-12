@@ -71,6 +71,30 @@
           cp -r * $out/
         '';
       };
+      syside-python-package = pkgs.python3Packages.buildPythonPackage rec {
+        pname = "syside";
+        version = syside_version;
+
+        src = pkgs.fetchurl {
+          # FIXME: use fetchPypi?
+          url = "https://files.pythonhosted.org/packages/fc/1d/e5b277fe50fb8aa605ed5e3b355763bb5134c54ca8bbb254ad66f9b63ad9/syside-0.8.3-cp312-abi3-manylinux_2_31_x86_64.whl";
+          hash = "sha256-M5WOp1e+BumjXWlILPXQqlWr9M2PgLM/tjblLBmund0=";
+          #format = "wheel";
+          #python = "cp312";
+          #abi = "abi3";
+          #platform = "manylinux_2_31_x86_64";
+        };
+        # do not run tests
+        doCheck = false;
+        dontBuild = true;
+
+        # specific to buildPythonPackage, see its reference
+        pyproject = true;
+        build-system = with pkgs.python3Packages; [
+          setuptools
+          wheel
+        ];
+      };
     });
     devShell = forAllSystems (
       system: let
@@ -79,6 +103,9 @@
         pkgs.mkShell {
           buildInputs = with pkgs; [
             alejandra
+            #(python3.withPackages (python-pkgs: [
+            #  self.packages.${system}.syside-python-package
+            #]))
             self.packages.${system}.syside-modeler-cli
           ];
           shellHook = ''
