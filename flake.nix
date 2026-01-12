@@ -50,11 +50,25 @@
           sha256 = "sha256-mZGtB1BaeVIR4K/cT0elpfW7zrQBFScVHHOsHIuKvJg=";
           arch = "linux-x64";
         };
+      };
+      syside-modeler-cli = pkgs.stdenv.mkDerivation {
+        pname = "syside-modeler-cli";
+        version = "0.8.3";
+
+        src = pkgs.fetchurl {
+          url = "https://gitlab.com/api/v4/projects/69960816/packages/generic/syside/0.8.3/syside-0.8.3-x86_64-linux-glibc.tar.xz";
+          sha256 = "sha256-C02KlqWg803/xR2651aTsAcnmfFQOCU3+Tc+VKgznXA=";
+        };
+
+        sourceRoot = ".";
+
         nativeBuildInputs = [pkgs.autoPatchelfHook];
         buildInputs = [pkgs.stdenv.cc.cc.lib];
-        # installPhase = ''
-        #   tar -xJf ../syside-0.8.3-x86_64-linux-glibc.tar.xz -C $out/share/vscode/extensions/sensmetry.syside-editor/dist
-        # '';
+
+        installPhase = ''
+          mkdir -p $out
+          cp -r * $out/
+        '';
       };
     });
     devShell = forAllSystems (
@@ -64,6 +78,7 @@
         pkgs.mkShell {
           buildInputs = with pkgs; [
             alejandra
+            self.packages.${system}.syside-modeler-cli
           ];
           shellHook = ''
             alias code='NIXPKGS_ALLOW_UNFREE=1 nix run --impure .#vscode -- '
