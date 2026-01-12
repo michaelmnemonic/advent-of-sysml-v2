@@ -32,7 +32,6 @@
         };
 
         vscode = pkgs.vscode-with-extensions.override {
-          vscode = pkgs.vscodium;
           vscodeExtensions = [
             syside
           ];
