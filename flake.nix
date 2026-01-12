@@ -16,7 +16,8 @@
       pkgs = nixpkgs.legacyPackages.${system}.pkgs;
     in {
       vscode = pkgs.vscode-with-extensions.override {
-        vscodeExtensions = [
+        vscodeExtensions = with pkgs.vscode-extensions; [
+          mkhl.direnv
           self.packages.${system}.syside
         ];
       };
