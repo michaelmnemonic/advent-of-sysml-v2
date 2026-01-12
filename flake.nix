@@ -44,6 +44,9 @@
               alejandra
             ]
             ++ [vscode];
+          shellHook = ''
+            alias code='NIXPKGS_ALLOW_UNFREE=1 nix run --impure .#vscode -- '
+          '';
         }
     );
   };
