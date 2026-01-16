@@ -20,6 +20,7 @@
         vscodeExtensions = with pkgs.vscode-extensions;
           [
             mkhl.direnv
+            ms-vscode-remote.remote-containers
             self.packages.${system}.syside-vscode-extension
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
