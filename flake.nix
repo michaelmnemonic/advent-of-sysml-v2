@@ -96,6 +96,39 @@
           wheel
         ];
       };
+      sysand = pkgs.rustPlatform.buildRustPackage (finalAttrs: {
+        pname = "sysand";
+        version = "0.0.7";
+
+        src = pkgs.fetchFromGitHub {
+          owner = "sensmetry";
+          repo = "sysand";
+          tag = nixpkgs.lib.strings.concatStrings ["v" finalAttrs.version];
+          hash = "sha256-RwLey61fK/qkZIFjq1KwPN7gJUnk+AkQF1DVIYJvX+Q=";
+        };
+
+        cargoHash = "sha256-sZbD4jy18eJRL95q2f8yTItbDT8DzziWGg7OgRlPjKk=";
+
+        nativeBuildInputs = with pkgs; [
+          pkg-config
+          python3
+        ];
+        buildInputs = with pkgs; [
+          openssl
+        ];
+
+        # We are only packaging the sysand CLI, not its language bindings
+        # See https://github.com/sensmetry/sysand/blob/main/DEVELOPMENT.md
+        cargoBuildFlags = [ "--package" "sysand" ];
+        cargoTestFlags = [ "--package" "sysand-core" "-F" "filesystem,js,python,alltests" "--package" "-F" "alltests"];
+
+        meta = {
+          description = "A package manager for SysML v2 and KerML";
+          homepage = "https://github.com/sensmetry/sysand/tree/main/LICENSES";
+          license = with nixpkgs.lib.licenses; [ mit asl20 ];
+          maintainers = [];
+        };
+      });
     });
     devShell = forAllSystems (
       system: let
@@ -108,6 +141,7 @@
             #  self.packages.${system}.syside-python-package
             #]))
             self.packages.${system}.syside-modeler-cli
+            self.packages.${system}.sysand
           ];
           shellHook = ''
             alias code='NIXPKGS_ALLOW_UNFREE=1 nix run --impure .#vscode -- '
