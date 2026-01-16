@@ -1,0 +1,12 @@
+{
+  "index": {
+    "MyProject": "MyProject.sysml"
+  },
+  "created": "2026-01-16T22:55:41.860493908Z",
+  "checksum": {
+    "MyProject.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    }
+  }
+}

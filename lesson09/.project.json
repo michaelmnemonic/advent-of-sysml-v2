@@ -1,0 +1,9 @@
+{
+  "name": "lesson09",
+  "version": "0.0.1",
+  "usage": [
+    {
+      "resource": "urn:kpar:quantities-and-units-library"
+    }
+  ]
+}
